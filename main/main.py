@@ -98,7 +98,7 @@ class Mage(Character):
         if not opponent.is_alive():
             print(f"  💀 {opponent.name} has been defeated!")
 
-    # ── FIX 3: method is now called frost(), matching the class definition ──
+    
     def frost(self):
         self.shielded = True
         print(f"\n  🔮 Frost!  {self.name} will block the next attack!")
@@ -152,7 +152,7 @@ class Archer(Character):
 
 
 # ─────────────────────────────────────────────────────────────
-#  CIWS class  (renamed from Paladin – user change)
+#  CIWS class  
 #
 
 class CIWS(Character):
