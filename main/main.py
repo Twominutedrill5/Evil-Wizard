@@ -1,4 +1,5 @@
 import random
+import random
 
 # ─────────────────────────────────────────────────────────────
 #  Base Character class
@@ -80,8 +81,7 @@ class Warrior(Character):
 
 # ─────────────────────────────────────────────────────────────
 #  Mage class
-#  Ability 2: frost (blocks next incoming attack)
-# ─────────────────────────────────────────────────────────────
+#
 class Mage(Character):
     def __init__(self, name):
         super().__init__(name, health=100, attack_power=35)
@@ -152,14 +152,12 @@ class Archer(Character):
 
 
 # ─────────────────────────────────────────────────────────────
-#  CIWS class  
-#
-
+#  Cannon class
+# ─────────────────────────────────────────────────────────────
 class CIWS(Character):
     def __init__(self, name):
         super().__init__(name, health=140, attack_power=20)
         self.shielded = False
-
 
     def cannon(self, opponent):
         bonus   = random.randint(15, 25)
@@ -182,14 +180,9 @@ class CIWS(Character):
         print(f"     Shield  : {'Active ✅' if self.shielded else 'Inactive ❌'}")
 
 
-# ─────────────────────────────────────────────────────────────
-# ─────────────────────────────────────────────────────────────
-#  Ghost class  (NEW)
-#    Attack  1 – Haunt       : drains enemy HP and restores own
-#    Attack  2 – Possession  : forces wizard to strike himself
-#    Defence 1 – Invisibility: evades the next 2 incoming hits
-#    Defence 2 – Shapeshift  : restore 25 HP + boost ATK by 6
-# ─────────────────────────────────────────────────────────────
+
+#  Ghost class 
+# 
 class Ghost(Character):
     def __init__(self, name):
         super().__init__(name, health=115, attack_power=20)
@@ -222,14 +215,14 @@ class Ghost(Character):
         if not opponent.is_alive():
             print(f"  💀 {opponent.name} has been defeated!")
 
-    # ── Defence 1 : Invisibility ─────────────────────────────
+    # ── Defense 1 : Invisibility ─────────────────────────────
     def invisibility(self):
         """Turn invisible — dodge the next 2 incoming attacks."""
         self.invisibility_charges = 2
         print(f"\n  🌫️  INVISIBILITY! {self.name} fades from sight "
               f"— will dodge the next 2 attacks!")
 
-    # ── Defence 2 : Shapeshift ───────────────────────────────
+    # ── Defense 2 : Shapeshift ───────────────────────────────
     def shapeshift(self):
         """Shapeshift into a stronger form: heal 25 HP + gain 6 ATK."""
         atk_gain = 6
@@ -285,7 +278,7 @@ class EvilWizard(Character):
         player.health -= damage
         player.health  = max(0, player.health)
         print(f"\n  💀 DARK MAGIC! {self.name} blasts {player.name} "
-              f"for {damage} damage! (pierces all defences!)")
+              f"for {damage} damage! (pierces all defenses!)")
         if was_shielded or was_evading or was_invisible:
             print("     ⚡ Your shield/evasion was bypassed!")
         if not player.is_alive():
@@ -378,7 +371,7 @@ def battle(player, wizard):
         print("\n  --- Your Turn ---")
         print("  1. Attack")
 
-        # ── Ghost gets a 7-option menu (4 abilities); others get 5 ──
+        
         if isinstance(player, Ghost):
             pc = player.possession_cooldown
             ic = player.invisibility_charges
@@ -411,7 +404,7 @@ def battle(player, wizard):
                 break
             print(f"  ⚠️  Enter a number from the menu.")
 
-        # ── Dispatch ──────────────────────────────────────────
+       
         if choice == '1':
             player.attack(wizard)
 
